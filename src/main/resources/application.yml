@@ -1,0 +1,46 @@
+# 服务器配置
+server:
+  port: 11001
+  servlet-path: /
+
+spring:
+  profiles:
+    active: '@activatedProperties@'
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: 127.0.0.1:3306
+    dbName: ylb
+    url: jdbc:mysql://127.0.0.1:3306/ylb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 12345678
+
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+    static-path-pattern: /static/**
+
+  web:
+    resources:
+      static-locations: classpath:/static/,file:${plugin.storage-path}
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+
+logging:
+  level:
+    org.springframework: debug
+
+plugin:
+  storage-path: ./plugins/
+  remote-upload-enabled: true
+  max-version-count: 5
