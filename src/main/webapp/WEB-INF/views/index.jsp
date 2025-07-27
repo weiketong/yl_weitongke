@@ -109,10 +109,10 @@
                     <a href="https://docs.qq.com/doc/DREdWVGJxeFFOSFhI" target="_blank" class="btn-hover bg-white/20 text-white px-8 py-3 rounded-lg font-medium backdrop-blur-sm border border-white/30">
                         快速上手 <i class="fa fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="<c:url value='/install/?from=index.jsp' />" target="_blank" class="btn-hover bg-white/20 text-white px-8 py-3 rounded-lg font-medium backdrop-blur-sm border border-white/30">
+                    <a href="<c:url value='/installIndex' />" target="_blank" class="btn-hover bg-white/20 text-white px-8 py-3 rounded-lg font-medium backdrop-blur-sm border border-white/30">
                         立即安装 <i class="fa fa-download ml-2"></i>
                     </a>
-                    <a href="<c:url value='/console/login/?from=index.jsp' />" target="_blank" class="btn-hover bg-white/20 text-white px-8 py-3 rounded-lg font-medium backdrop-blur-sm border border-white/30">
+                    <a href="<c:url value='/loginIndex' />" target="_blank" class="btn-hover bg-white/20 text-white px-8 py-3 rounded-lg font-medium backdrop-blur-sm border border-white/30">
                         登录后台 <i class="fa fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -246,8 +246,8 @@
                     <h3 class="text-lg font-semibold mb-4">快速链接</h3>
                     <ul class="space-y-2">
                         <li><a href="https://docs.qq.com/doc/DREdWVGJxeFFOSFhI" target="_blank" class="text-gray-400 hover:text-white transition-colors">快速上手</a></li>
-                        <li><a href="<c:url value='/install' />" target="_blank" class="text-gray-400 hover:text-white transition-colors">安装指南</a></li>
-                        <li><a href="<c:url value='/console/login' />" target="_blank" class="text-gray-400 hover:text-white transition-colors">管理后台</a></li>
+                        <li><a href="<c:url value='/installIndex' />" target="_blank" class="text-gray-400 hover:text-white transition-colors">安装指南</a></li>
+                        <li><a href="<c:url value='/loginIndex' />" target="_blank" class="text-gray-400 hover:text-white transition-colors">管理后台</a></li>
                         <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">功能介绍</a></li>
                         <li><a href="#changelog" class="text-gray-400 hover:text-white transition-colors">更新日志</a></li>
                     </ul>

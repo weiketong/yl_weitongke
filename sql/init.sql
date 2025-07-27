@@ -64,3 +64,22 @@ ON DUPLICATE KEY UPDATE password = VALUES(password);
 -- 创建插件存储目录
 -- 在实际部署时需要手动创建或通过脚本创建
 -- mkdir -p ./plugins && chmod 775 ./plugins
+
+CREATE TABLE `huoma_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+  `user_id` int(10) DEFAULT NULL COMMENT '用户ID',
+  `user_name` varchar(32) DEFAULT NULL COMMENT '账号',
+  `user_pass` varchar(64) DEFAULT NULL COMMENT '密码',
+  `user_email` text COMMENT '邮箱',
+  `user_mb_ask` text COMMENT '密保问题',
+  `user_mb_answer` varchar(32) DEFAULT NULL COMMENT '密保答案',
+  `user_creat_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  `user_expire_time` timestamp NULL DEFAULT '2035-12-31 23:59:59' COMMENT '到期时间',
+  `user_expire` varchar(32) DEFAULT NULL COMMENT '到期时间',
+  `user_admin` int(2) DEFAULT '2' COMMENT '管理权限（1是 2否）',
+  `user_manager` varchar(32) DEFAULT NULL COMMENT '账号管理者',
+  `user_beizhu` varchar(64) DEFAULT NULL COMMENT '备注信息',
+  `user_group` varchar(32) DEFAULT NULL COMMENT '用户组',
+  `user_status` int(2) NOT NULL DEFAULT '1' COMMENT '账号状态（1可用 2停用）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;

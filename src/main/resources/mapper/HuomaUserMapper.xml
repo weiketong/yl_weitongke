@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylb.mapper.HuomaUserMapper">
+    <!--基础字段映射-->
+    <resultMap type="com.ylb.entity.HuomaUser" id="baseMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userPass" column="user_pass" jdbcType="VARCHAR"/>
+        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
+        <result property="userMbAsk" column="user_mb_ask" jdbcType="VARCHAR"/>
+        <result property="userMbAnswer" column="user_mb_answer" jdbcType="VARCHAR"/>
+        <result property="userCreatTime" column="user_creat_time" jdbcType="TIMESTAMP"/>
+        <result property="userExpireTime" column="user_expire_time" jdbcType="TIMESTAMP"/>
+        <result property="userExpire" column="user_expire" jdbcType="VARCHAR"/>
+        <result property="userAdmin" column="user_admin" jdbcType="INTEGER"/>
+        <result property="userManager" column="user_manager" jdbcType="VARCHAR"/>
+        <result property="userBeizhu" column="user_beizhu" jdbcType="VARCHAR"/>
+        <result property="userGroup" column="user_group" jdbcType="VARCHAR"/>
+        <result property="userStatus" column="user_status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findByUserName" resultMap="baseMap">
+        select * from huoma_user where user_name = #{userName}
+    </select>
+
+    <select id="selectByOne" resultMap="baseMap">
+        select * from huoma_user limit 1
+    </select>
+</mapper>
+
