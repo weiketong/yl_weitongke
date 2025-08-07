@@ -12,6 +12,13 @@
     <script type="text/javascript" src="<c:url value='/static/js/popper.min.js' />"></script>
     <script type="text/javascript" src="<c:url value='/static/js/bootstrap.min.js' />"></script>
     <script type="text/javascript" src="<c:url value='/static/js/qrcode.min.js' />"></script>
+    <script type="text/javascript">
+        var timestamp = new Date().getTime();
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '/static/js/config.js?v=' + timestamp;
+        document.head.appendChild(script);
+    </script>
     <style>
 
         /* 选中样式 */
@@ -39,17 +46,6 @@
             margin-bottom: 10px;
             float: left;
         }
-
-        .belongLogo {
-            width: 147px;
-            height: 114px;
-            margin-bottom: 30px;
-            background-image: url('/static/img/index_logo.png');
-            background-position: center;
-            background-size: 90%;
-            background-repeat: no-repeat;
-        }
-
     </style>
 </head>
 <body>
@@ -57,92 +53,7 @@
 <div id="app">
 
     <!-- 左侧 -->
-    <div class="left">
-        <div class="dhview">
-
-            <!-- LOGO -->
-            <a href="<c:url value='/menu/index' />" class="index">  <!-- 修正链接路径 -->
-                <div class="belongLogo"></div>
-            </a>
-
-            <!-- 导航 -->
-            <ul>
-                <a href="<c:url value='/index/' />" >
-                    <li class="nav-li">
-                        <i class="icon i-data"></i>
-                        <span class="nav-text">数据</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/qun/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-hm"></i>
-                        <span class="nav-text">活码</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/dwz/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-dwz"></i>
-                        <span class="nav-text">短网址</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/tbk/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-tbk"></i>
-                        <span class="nav-text">淘宝客</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/shareCard/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-share"></i>
-                        <span class="nav-text">分享卡片</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/plugin/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-plugin"></i>
-                        <span class="nav-text">插件中心</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/kami/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-kami"></i>
-                        <span class="nav-text">卡密分发</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/config/' />" class="selected">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-config-dark"></i>
-                        <span class="nav-text">配置中心</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/sucai/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-sucai"></i>
-                        <span class="nav-text">素材管理</span>
-                    </li>
-                </a>
-
-                <a href="<c:url value='/user/' />">  <!-- 修正链接路径 -->
-                    <li class="nav-li">
-                        <i class="icon i-account"></i>
-                        <span class="nav-text">账号管理</span>
-                    </li>
-                </a>
-            </ul>
-
-            <!-- 账号 -->
-            <div class="account">加载中...</div>
-
-        </div>
-    </div>
+    <jsp:include page="/WEB-INF/views/common/left.jsp" />
 
     <!-- 右侧 -->
     <div id="right">

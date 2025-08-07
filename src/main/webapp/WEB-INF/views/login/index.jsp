@@ -86,7 +86,7 @@
                     showSuccessResult(res.msg)
 
                     // 0.5秒后跳转到首页
-                    redirectPage('<c:url value='/menu/index' />', 500);
+                    redirectPage('<c:url value='/menu/consoleIndex' />', 500);
 
                 }else{
 
