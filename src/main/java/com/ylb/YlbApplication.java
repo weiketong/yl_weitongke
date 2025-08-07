@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @date 7/26/25 2:45 PM
  */
 @SpringBootApplication
-@MapperScan(value = "com.ylb.mapper")
+@MapperScan(basePackages = {"com.ylb.entity", "com.ylb.mapper"})
 @EnableAsync
 @EnableScheduling
 public class YlbApplication extends SpringBootServletInitializer {

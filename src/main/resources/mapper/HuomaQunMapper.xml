@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylb.mapper.HuomaQunMapper">
+    <!--基础字段映射-->
+    <resultMap type="com.ylb.entity.HuomaQun" id="baseMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="qunId" column="qun_id" jdbcType="INTEGER"/>
+        <result property="qunTitle" column="qun_title" jdbcType="VARCHAR"/>
+        <result property="qunStatus" column="qun_status" jdbcType="INTEGER"/>
+        <result property="qunCreatTime" column="qun_creat_time" jdbcType="TIMESTAMP"/>
+        <result property="qunPv" column="qun_pv" jdbcType="INTEGER"/>
+        <result property="qunTodayPv" column="qun_today_pv" jdbcType="VARCHAR"/>
+        <result property="qunQc" column="qun_qc" jdbcType="INTEGER"/>
+        <result property="qunNotify" column="qun_notify" jdbcType="VARCHAR"/>
+        <result property="qunRkym" column="qun_rkym" jdbcType="VARCHAR"/>
+        <result property="qunLdym" column="qun_ldym" jdbcType="VARCHAR"/>
+        <result property="qunDlym" column="qun_dlym" jdbcType="VARCHAR"/>
+        <result property="qunKf" column="qun_kf" jdbcType="VARCHAR"/>
+        <result property="qunKfStatus" column="qun_kf_status" jdbcType="INTEGER"/>
+        <result property="qunSafety" column="qun_safety" jdbcType="INTEGER"/>
+        <result property="qunBeizhu" column="qun_beizhu" jdbcType="VARCHAR"/>
+        <result property="qunKey" column="qun_key" jdbcType="VARCHAR"/>
+        <result property="qunCreatUser" column="qun_creat_user" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryHuomaOrderBy" resultMap="baseMap">
+        select * from huoma_qun order by id desc
+    </select>
+</mapper>
+

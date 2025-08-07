@@ -53,7 +53,7 @@
 <div id="app">
 
     <!-- 左侧 -->
-    <jsp:include page="/WEB-INF/views/common/left.jsp" />
+    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/left.jsp" />
 
     <!-- 右侧 -->
     <div id="right">

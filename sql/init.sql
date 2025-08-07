@@ -83,3 +83,25 @@ CREATE TABLE `huoma_user` (
   `user_status` int(2) NOT NULL DEFAULT '1' COMMENT '账号状态（1可用 2停用）',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `huoma_qun` (
+                           `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+                           `qun_id` int(10) DEFAULT NULL COMMENT '群ID',
+                           `qun_title` varchar(64) DEFAULT NULL COMMENT '群标题',
+                           `qun_status` int(2) NOT NULL DEFAULT '1' COMMENT '状态（1开启 2关闭）默认1',
+                           `qun_creat_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                           `qun_pv` int(10) NOT NULL DEFAULT '0' COMMENT '访问量',
+                           `qun_today_pv` varchar(64) DEFAULT NULL COMMENT '今天访问量',
+                           `qun_qc` int(2) NOT NULL DEFAULT '2' COMMENT '去重（1开启 2关闭）默认2',
+                           `qun_notify` varchar(32) DEFAULT NULL COMMENT '通知渠道',
+                           `qun_rkym` text COMMENT '入口域名',
+                           `qun_ldym` text COMMENT '落地域名',
+                           `qun_dlym` text COMMENT '短链域名',
+                           `qun_kf` text COMMENT '客服二维码',
+                           `qun_kf_status` int(2) NOT NULL DEFAULT '2' COMMENT '客服开启状态（1开启 2关闭）默认2',
+                           `qun_safety` int(2) NOT NULL DEFAULT '1' COMMENT '顶部安全提示（1显 2隐）',
+                           `qun_beizhu` text COMMENT '群备注',
+                           `qun_key` varchar(10) DEFAULT NULL COMMENT '短链接Key',
+                           `qun_creat_user` varchar(32) DEFAULT NULL COMMENT '创建者账号',
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='群活码列表';

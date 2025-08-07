@@ -937,4 +937,4 @@ function queryURLParams(url) {
     return parames;
 }
 
-console.log('%c 欢迎使用引流宝','color:#3B5EE1;font-size:30px;font-family:"微软雅黑"');
+console.log('%c 欢迎使用微通云引流宝','color:#3B5EE1;font-size:30px;font-family:"微软雅黑"');

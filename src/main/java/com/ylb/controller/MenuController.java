@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MenuController {
 
-    @GetMapping("/menu/consoleIndex")
-    public String menuIndex() {
-        return "console/index";
+    @GetMapping("/menu/dataIndex")
+    public String dataIndex() {
+        return "menu/dataIndex";
+    }
+
+    @GetMapping("/menu/huomaIndex")
+    public String huomaIndex() {
+        return "menu/huomaIndex";
     }
 }

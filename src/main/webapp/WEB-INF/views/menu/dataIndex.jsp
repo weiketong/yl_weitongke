@@ -20,7 +20,7 @@
 <div id="app">
 
     <!-- 左侧布局 -->
-    <jsp:include page="/WEB-INF/views/common/left.jsp" />
+    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/common/left.jsp" />
 
     <!-- 右侧布局 -->
     <div id="right">

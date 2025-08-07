@@ -548,7 +548,7 @@ function jumpUrl(jumpUrl){
     setTimeout('location.href="'+jumpUrl+'"',1000);
 }
 
-console.log('%c 欢迎使用引流宝','color:#3B5EE1;font-size:20px;font-family:"微软雅黑"');
+console.log('%c 欢迎使用微通云引流宝','color:#3B5EE1;font-size:20px;font-family:"微软雅黑"');
 console.log('%c 作者：Ricky','color:#3B5EE1;font-size:20px;font-family:"微软雅黑"');
 console.log('%c 作者博客：https://segmentfault.com/u/tanking','color:#3B5EE1;font-size:20px;font-family:"微软雅黑"');
 console.log('%c 开源地址：https://github.com/weiketong/yl_weitongke','color:#3B5EE1;font-size:20px;font-family:"微软雅黑"');

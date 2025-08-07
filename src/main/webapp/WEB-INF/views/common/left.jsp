@@ -17,20 +17,20 @@
     <div class="dhview">
 
         <!-- LOGO -->
-        <a href="${pageContext.request.contextPath}/index/" class="index">
+        <a href="${pageContext.request.contextPath}/menu/dataIndex/" class="index">
             <div class="belongLogo"></div>
         </a>
 
         <!-- 导航 -->
         <ul>
-            <a href="${pageContext.request.contextPath}/index/" class="selected">
+            <a href="${pageContext.request.contextPath}/menu/dataIndex/" class="selected">
                 <li class="nav-li">
                     <i class="icon i-data-dark"></i>
                     <span class="nav-text">数据</span>
                 </li>
             </a>
 
-            <a href="${pageContext.request.contextPath}/qun/">
+            <a href="${pageContext.request.contextPath}/menu/huomaIndex/">
                 <li class="nav-li">
                     <i class="icon i-hm"></i>
                     <span class="nav-text">活码</span>
@@ -41,34 +41,6 @@
                 <li class="nav-li">
                     <i class="icon i-dwz"></i>
                     <span class="nav-text">短网址</span>
-                </li>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/tbk/">
-                <li class="nav-li">
-                    <i class="icon i-tbk"></i>
-                    <span class="nav-text">淘宝客</span>
-                </li>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/shareCard/">
-                <li class="nav-li">
-                    <i class="icon i-share"></i>
-                    <span class="nav-text">分享卡片</span>
-                </li>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/plugin/">
-                <li class="nav-li">
-                    <i class="icon i-plugin"></i>
-                    <span class="nav-text">插件中心</span>
-                </li>
-            </a>
-
-            <a href="${pageContext.request.contextPath}/kami/">
-                <li class="nav-li">
-                    <i class="icon i-kami"></i>
-                    <span class="nav-text">卡密分发</span>
                 </li>
             </a>
 
