@@ -44,7 +44,7 @@
                 </li>
             </a>
 
-            <a href="${pageContext.request.contextPath}/config/">
+            <a href="${pageContext.request.contextPath}/menu/configIndex/">
                 <li class="nav-li">
                     <i class="icon i-config"></i>
                     <span class="nav-text">配置中心</span>

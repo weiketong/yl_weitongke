@@ -1793,7 +1793,7 @@ function getBingliuList(pageNum) {
                 if(res.code == 201){
                     
                     // 跳转到登录页面
-                    jumpUrl('../login/');
+                    jumpUrl('/loginIndex');
                 }
                 
                 // 非200状态码

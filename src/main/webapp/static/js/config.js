@@ -1,9 +1,7 @@
 
 // 进入就加载
 window.onload = function (){
-    
-    init1();
-    
+
     // 获取登录状态
     getLoginStatus();
     
@@ -26,7 +24,7 @@ function getLoginStatus(){
     // 获取
     $.ajax({
         type: "POST",
-        url: "../login/getLoginStatus.php",
+        url: "/login/getLoginStatus",
         success: function(res){
             
             // 成功
@@ -59,7 +57,7 @@ function getLoginStatus(){
         error: function() {
             
             // 服务器发生错误
-            errorPage('data-list','getLoginStatus.php');
+            errorPage('data-list','getLoginStatus.java');
         }
     });
 }
@@ -86,33 +84,6 @@ function initialize_Login(loginStatus,user_admin){
     }
 }
 
-// 检查当前版本的代码与数据库是否搭配
-// 如果不搭配，需要通过初始化操作数据库
-function init1() {
-    $.ajax({type: "POST",url: "init1.php",});
-}
-
-// 获取默认域名
-function getDefaultDomainName(){
-    
-    $.ajax({
-        type: "POST",
-        url: "./getDefaultDomainName.php",
-        success: function(res){
-            
-            // 将默认域名添加至选项中
-            $("#default_rkym").append('<option value="'+res.default_rkym+'">'+res.default_rkym+'</option>');
-            $("#default_ldym").append('<option value="'+res.default_ldym+'">'+res.default_ldym+'</option>');
-            $("#default_dlym").append('<option value="'+res.default_dlym+'">'+res.default_dlym+'</option>');
-        },
-        error: function() {
-            
-            // 服务器发生错误
-            showErrorResultForphpfileName('getDefaultDomainName.php');
-        }
-    });
-}
-
 // 加载域名列表
 function getDomainNameList(pageNum) {
     
@@ -120,11 +91,11 @@ function getDomainNameList(pageNum) {
     if(!pageNum){
         
         // 如果没有就默认请求第1页
-        reqUrl = "./getDomainNameList.php";
+        reqUrl = "/domainList";
     }else{
         
         // 如果有就请求pageNum的那一页
-        reqUrl = "./getDomainNameList.php?p="+pageNum
+        reqUrl = "/domainList?p="+pageNum
     }
     
     // 获取
@@ -143,7 +114,7 @@ function getDomainNameList(pageNum) {
                 '   <th>类型</th>' +
                 '   <th>备注</th>' +
                 '   <th>域名/落地页</th>' +
-                '   <th>授权用户组</th>' +
+                '   <th>域名屏蔽状态</th>' +
                 '   <th>操作</th>' +
                 '</tr>'
             );
@@ -156,32 +127,31 @@ function getDomainNameList(pageNum) {
                 // 遍历数据
                 let domain_beizhu;
                 for (var i=0; i<res.domainList.length; i++) {
-                    
-                    var xuhao = i+1;
-                    var domain_id = res.domainList[i].domain_id;
+
+                    var domain_id = res.domainList[i].domainId;
                     
                     // 类型
-                    if(res.domainList[i].domain_type == 1){
+                    if(res.domainList[i].domainType == 1){
                         
                         // 入口域名
                         var domain_type = '<span class = "light-tag">入口域名</span>';
-                    }else if(res.domainList[i].domain_type == 2){
+                    }else if(res.domainList[i].domainType == 2){
                         
                         // 落地域名
                         var domain_type = '<span class = "light-tag">落地域名</span>';
-                    }else if(res.domainList[i].domain_type == 3){
+                    }else if(res.domainList[i].domainType == 3){
                         
                         // 短链域名
                         var domain_type = '<span class = "light-tag">短链域名</span>';
-                    }else if(res.domainList[i].domain_type == 4){
+                    }else if(res.domainList[i].domainType == 4){
                         
                         // 备用域名
                         var domain_type = '<span class = "light-tag">备用域名</span>';
-                    }else if(res.domainList[i].domain_type == 5){
+                    }else if(res.domainList[i].domainType == 5){
                         
                         // 对象存储域名
                         var domain_type = '<span class = "light-tag">对象存储域名</span>';
-                    }else if(res.domainList[i].domain_type == 6){
+                    }else if(res.domainList[i].domainType == 6){
                         
                         // 轮询域名
                         var domain_type = '<span class = "light-tag">轮询域名</span>';
@@ -191,39 +161,14 @@ function getDomainNameList(pageNum) {
                     var domain = res.domainList[i].domain;
                     
                     // 备注
-                    if(res.domainList[i].domain_beizhu || res.domainList[i].domain_beizhu !== null) {
+                    if(res.domainList[i].domainBeizhu || res.domainList[i].domainBeizhu !== null) {
                         
                         // 有备注信息
-                        domain_beizhu = res.domainList[i].domain_beizhu + ' 🖌';
+                        domain_beizhu = res.domainList[i].domainBeizhu + ' 🖌';
                     }else {
                         
                         // 没有
                         domain_beizhu = '🖌';
-                    }
-                    
-                    // 授权用户组
-                    var domain_usergroup = res.domainList[i].domain_usergroup;
-                    if(domain_usergroup) {
-                        
-                        // 取出JSON数组
-                        var domain_usergroup_Array = JSON.parse(domain_usergroup.replace(/'/g, "\""));
-                        var result_domain_usergroup = "";
-                        domain_usergroup_Array.forEach(function(domain_usergroup_, index) {
-                            result_domain_usergroup += domain_usergroup_;
-                            if (index < domain_usergroup_Array.length - 1) {
-                                result_domain_usergroup += "、";
-                            }
-                        });
-                        
-                        // 拼接渲染数据
-                        var domain_usergroup_data = '<span style="max-width:300px;display:block;">' + result_domain_usergroup + '，<span onclick="getSelectedUsergroup('+domain_id+')" class="add_usergroup" data-toggle="modal" data-target="#addUsergroupModal">添加</span></span>';
-                    }else {
-                        
-                        var domain_usergroup_data = 
-                        '<span style="max-width:300px;display:block;">' +
-                            '<span>未添加，</span>' +
-                            '<span onclick="getSelectedUsergroup('+domain_id+')" class="add_usergroup" data-toggle="modal" data-target="#addUsergroupModal">添加</span>' +
-                        '</span>';
                     }
                     
                     // 列表
@@ -233,7 +178,7 @@ function getDomainNameList(pageNum) {
                         '   <td>'+domain_type+'</td>' +
                         '   <td onclick="update_beizhu('+domain_id+')" style="cursor:pointer;" title="点击修改备注">'+domain_beizhu+'</td>' +
                         '   <td style="max-width:400px;word-break: break-word;">'+domain+'</td>' +
-                        '   <td>'+domain_usergroup_data+'</td>' +
+                        '   <td>'+ '正常' +'</td>' +
                         '   <td data-toggle="modal" id="'+domain_id+'" data-target="#DelDomainModal" onclick="askDelDomainName(this);"><span class="light-tag" style="cursor:pointer;">删除</span></td>' +
                         '</tr>'
                     );
@@ -298,7 +243,7 @@ function getDomainNameList(pageNum) {
                 if(res.code == 201){
                     
                     // 跳转到登录页面
-                    jumpUrl('../login/');
+                    jumpUrl('/loginIndex');
                 }
                 
                 // 205状态码：无管理权限
@@ -320,7 +265,7 @@ function getDomainNameList(pageNum) {
       error: function(){
         
         // 发生错误
-        errorPage('data-list','getDomainNameList.php');
+        errorPage('data-list','getDomainNameList.java');
         
         // 隐藏顶部按钮
         $('#right .button-view').html('');
@@ -375,129 +320,6 @@ function init2() {
     });
 }
 
-// 获取当前域名已选择的用户组
-// 并且进行设置用户组
-function getSelectedUsergroup(domain_id) {
-    
-    $("#selectedTags").html('');
-    $("#availableTags").html('');
-    $('#addUsergroupModal .domain_id').val(domain_id);
-
-    $.ajax({
-        type: "POST",
-        url: "./getSelectedUsergroup.php?domain_id=" + domain_id,
-        success: function(res){
-            
-            // 获取成功
-            // 已选的用户组
-            var selectedUsergroupArray = res.domain_usergroup;
-            
-            // 可选的用户组
-            var availableUsergroupArray = res.usergroupList;
-            
-            // 初始化已选中的用户组
-            function initializeSelectedTags() {
-                
-                var selectedTags = $("#selectedTags");
-                $.each(selectedUsergroupArray, function(index, value) {
-                    var tag = $("<span>").text(value).addClass("usergroup_selected");
-                    tag.click(toggleTag);
-                    selectedTags.append(tag);
-                });
-            }
-            
-            // 初始化可选标签
-            function initializeAvailableTags() {
-                
-                var availableTags = $("#availableTags");
-                $.each(availableUsergroupArray, function(index, value) {
-                    var tag = $("<span>").text(value).addClass("unselected");
-                    tag.click(toggleTag);
-                    availableTags.append(tag);
-                });
-            }
-            
-            // 新的选中项（在已选的基础上添加新的项）
-            newUsergroupArray = selectedUsergroupArray;
-            
-            // 切换标签的选中状态
-            function toggleTag() {
-                
-                // 获取当前点击的标签
-                var tag = $(this);
-                var text = tag.text();
-            
-                if (tag.hasClass("usergroup_selected")) {
-                    
-                    // 移除选中样式
-                    tag.removeClass("usergroup_selected").addClass("unselected");
-                    
-                    // 移除选中项
-                    newUsergroupArray = newUsergroupArray.filter(item => item != text)
-                } else {
-                    
-                    // 添加选中样式
-                    tag.removeClass("unselected").addClass("usergroup_selected");
-                
-                    // 添加选中项
-                    newUsergroupArray.push(text);
-                }
-                
-                // 将新的选中项设置到表单中
-                $('#addUsergroupModal .newUsergroupArray').val(newUsergroupArray);
-                
-                // 打印新的选中项
-                console.log(newUsergroupArray)
-            }
-            
-            // 初始化
-            initializeSelectedTags();
-            initializeAvailableTags();
-        },
-        error: function() {
-            
-            // 获取失败
-            showErrorResultForphpfileName('getSelectedUsergroup.php');
-        }
-    });
-}
-
-// 设置当前域名的用户组
-function setUsergroup() {
-    
-    // 获取已选的项以及ID
-    const newUsergroupArray = $('#addUsergroupModal .newUsergroupArray').val();
-    const domain_id = $('#addUsergroupModal .domain_id').val();
-    
-    // 提交
-    $.ajax({
-        type: "GET",
-        url: "./setUsergroup.php?newUsergroupArray=" + newUsergroupArray + "&domain_id=" + domain_id,
-        success: function(res){
-            
-            // 成功
-            if(res.code == 200){
-               
-                showSuccessResult(res.msg);
-                
-                setTimeout('hideModal("addUsergroupModal")', 500);
-                
-                // 获取新的列表
-                setTimeout('getDomainNameList()', 800);
-            }else{
-                
-                // 失败
-                showErrorResult(res.msg);
-            }
-        },
-        error: function() {
-            
-            // 获取失败
-            showErrorResultForphpfileName('setUsergroup.php');
-        }
-    });
-}
-
 // 修改备注
 function update_beizhu(domain_id) {
 
@@ -527,69 +349,6 @@ function update_beizhu(domain_id) {
     }
 }
 
-// 获取通知渠道配置
-function getNotificationConfig(){
-    
-    $.ajax({
-        type: "POST",
-        url: "./getNotificationConfig.php",
-        success: function(res){
-            
-            if(res.code == 200){
-                
-                // 将配置信息填写至表单
-                $('#notiConfigModal input[name="corpid"]').val(res.notificationConfig.corpid);
-                $('#notiConfigModal input[name="corpsecret"]').val(res.notificationConfig.corpsecret);
-                $('#notiConfigModal input[name="touser"]').val(res.notificationConfig.touser);
-                $('#notiConfigModal input[name="agentid"]').val(res.notificationConfig.agentid);
-                $('#notiConfigModal input[name="bark_url').val(res.notificationConfig.bark_url);
-                $('#notiConfigModal input[name="email_acount"]').val(res.notificationConfig.email_acount);
-                $('#notiConfigModal input[name="email_pwd"]').val(res.notificationConfig.email_pwd);
-                $('#notiConfigModal input[name="email_receive').val(res.notificationConfig.email_receive);
-                $('#notiConfigModal input[name="email_smtp"]').val(res.notificationConfig.email_smtp);
-                $('#notiConfigModal input[name="email_port"]').val(res.notificationConfig.email_port);
-                $('#notiConfigModal input[name="SendKey"]').val(res.notificationConfig.SendKey);
-                $('#notiConfigModal input[name="http_url"]').val(res.notificationConfig.http_url);
-            }
-        },
-        error: function() {
-            
-            // 服务器发生错误
-            showErrorResult('服务器发生错误！可按F12打开开发者工具点击Network或网络查看或添加开发人员微信协助排查：RickyHappy110进行咨询！')
-        }
-    });
-}
-
-// 保存通知渠道配置
-function notiConfig() {
-    
-    $.ajax({
-        type: "POST",
-        url: "./notiConfig.php",
-        data: $('#notiConfig').serialize(),
-        success: function(res){
-            
-            // 成功
-            if(res.code == 200){
-                
-                showSuccessResult(res.msg);
-                setTimeout("hideModal('notiConfigModal')",600);
-                setTimeout("showNotification('"+res.msg+"')",800);
-            }else{
-                
-                // 保存失败
-                showErrorResult(res.msg);
-            }
-        },
-        error: function() {
-            
-            // 服务器发生错误
-            showNotification('服务器发生错误！可按F12打开开发者工具点击Network或网络查看或添加开发人员微信协助排查：RickyHappy110进行咨询！');
-        }
-    });
-}
-
-
 // 分页
 function getFenye(e){
     
@@ -598,89 +357,6 @@ function getFenye(e){
     
     // 获取该页列表
     getDomainNameList(pageNum);
-}
-
-// 测试一下（企业微信）
-function testQywx(){
-    
-    // 获取表单参数
-    const corpid = $('#notiConfigModal input[name="corpid"]').val();
-    const corpsecret = $('#notiConfigModal input[name="corpsecret"]').val();
-    const touser = $('#notiConfigModal input[name="touser"]').val();
-    const agentid = $('#notiConfigModal input[name="agentid"]').val();
-    
-    if(corpid && corpsecret && touser && agentid) {
-        
-        // 发送测试
-        $.ajax({
-            type: "GET",
-            url: "../public/qywx.php?noti_text=企业微信通知测试",
-            success: function(res){
-                
-                // 成功
-                if(res.errcode == 0 && res.errmsg == "ok"){
-                    
-                    alert('已发送测试消息，请自行前往手机查看企业微信通知。')
-                }else{
-                    
-                    // 失败
-                    alert(res.errcode)
-                }
-            },
-            error: function() {
-                
-                // 服务器发生错误
-                alert('服务器发生错误')
-            }
-        });
-    }
-}
-
-
-// 测试一下（电子邮件）
-function testEmail(){
-    
-    // 获取表单参数
-    const email_acount = $('#notiConfigModal input[name="email_acount"]').val();
-    const email_pwd = $('#notiConfigModal input[name="email_pwd"]').val();
-    const email_smtp = $('#notiConfigModal input[name="email_smtp"]').val();
-    const email_port = $('#notiConfigModal input[name="email_port"]').val();
-    const email_receive = $('#notiConfigModal input[name="email_receive"]').val();
-    
-    if(email_acount && email_pwd && email_smtp && email_port && email_receive) {
-        
-        // 发送测试
-        $.ajax({
-            type: "GET",
-            url: "../public/emailSend/?noti_text=电子邮件通知测试&aqm=123456",
-            success: function(res){
-                
-                // 成功
-                alert('已发送测试消息到你的电子邮箱，请注意查收。');
-            },
-            error: function() {
-                
-                // 服务器发生错误
-                alert('服务器发生错误')
-            }
-        });
-    }
-}
-
-// 复制定时任务URL
-function copyURL(element) {
-
-    var url = element.getAttribute('data-url');
-    var tempInput = document.createElement('input');
-    tempInput.value = url;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-    element.textContent = "已复制";
-    setTimeout(function() {
-        element.textContent = "复制URL";
-    }, 2000);
 }
 
 // 跳转到指定路径
@@ -701,11 +377,16 @@ function creatPageToken(length) {
 
 // 添加域名
 function addDomainName(){
-    
+    var formData = {
+        domain: $('#addDomainName [name="domain"]').val(),
+        domainType: $('#addDomainName [name="domain_type"]').val(),
+        domainBeizhu: $('#addDomainName [name="domain_beizhu"]').val()
+    };
     $.ajax({
         type: "POST",
-        url: "./addDomainName.php",
-        data: $('#addDomainName').serialize(),
+        url: "/addDomain",
+        contentType: "application/json", // 指定JSON格式
+        data: JSON.stringify(formData), // 转为JSON字符串
         success: function(res){
             
             // 成功
@@ -726,9 +407,8 @@ function addDomainName(){
             }
         },
         error: function() {
-            
             // 服务器发生错误
-            showErrorResultForphpfileName('addDomainName.php');
+            showErrorResultForphpfileName('addDomain.java');
         }
     });
 }

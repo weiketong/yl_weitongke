@@ -1,0 +1,63 @@
+package com.ylb.controller.domain;
+
+import com.ylb.entity.HuomaDomain;
+import com.ylb.service.DomainService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+
+@Controller
+public class DomainController {
+
+    @Resource
+    private DomainService domainService;
+
+    @PostMapping("/addDomain")
+    @ResponseBody
+    public Map<String, Object> addDomain(HttpSession session, @RequestBody HuomaDomain huomaDomain) {
+        Map<String, Object> result = new HashMap<>();
+        // 获取登录状态
+        String loginUser = (String) session.getAttribute("yinliubao");
+
+        if (loginUser != null && !loginUser.isEmpty()) {
+            huomaDomain.setDomainUsergroup(loginUser);
+            domainService.addDomain(result, huomaDomain);
+        } else {
+            // 未登录
+            result.put("code", 201);
+            result.put("msg", "未登录");
+        }
+        return result;
+    }
+
+    @PostMapping("/domainList")
+    @ResponseBody
+    public Map<String, Object> domainList(@RequestParam(defaultValue = "1") Integer p, HttpSession session) {
+        Map<String, Object> result = new HashMap<>();
+
+        // 获取登录状态
+        String loginUser = (String) session.getAttribute("yinliubao");
+
+        if (loginUser != null && !loginUser.isEmpty()) {
+
+            domainService.domainList(loginUser, p, result);
+            // 构建返回结果
+            result.put("code", 200);
+            result.put("msg", "获取成功");
+
+        } else {
+            // 未登录
+            result.put("code", 201);
+            result.put("msg", "未登录");
+        }
+
+        return result;
+    }
+}

@@ -105,3 +105,13 @@ CREATE TABLE `huoma_qun` (
                            `qun_creat_user` varchar(32) DEFAULT NULL COMMENT '创建者账号',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='群活码列表';
+
+CREATE TABLE `huoma_domain` (
+                                `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+                                `domain_id` int(10) DEFAULT NULL COMMENT '域名ID',
+                                `domain_type` int(2) DEFAULT NULL COMMENT '域名类型（1入口 2落地 3短链 4备用 5对象存储）',
+                                `domain` text COMMENT '域名',
+                                `domain_beizhu` varchar(32) DEFAULT NULL COMMENT '备注',
+                                `domain_usergroup` varchar(255) DEFAULT NULL COMMENT '授权用户组',
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='域名/落地页';

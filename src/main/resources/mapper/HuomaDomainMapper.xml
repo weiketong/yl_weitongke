@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylb.mapper.HuomaDomainMapper">
+
+    <resultMap type="com.ylb.entity.HuomaDomain" id="HuomaDomainMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="domainId" column="domain_id" jdbcType="INTEGER"/>
+        <result property="domainType" column="domain_type" jdbcType="INTEGER"/>
+        <result property="domain" column="domain" jdbcType="VARCHAR"/>
+        <result property="domainBeizhu" column="domain_beizhu" jdbcType="VARCHAR"/>
+        <result property="domainUsergroup" column="domain_usergroup" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectByTypeAndDomain" resultMap="HuomaDomainMap">
+        select * from huoma_domain where domain_type = #{domainType} and domain = #{domain}
+    </select>
+    <!--查询单个-->
+    <select id="queryById" resultMap="HuomaDomainMap">
+        select id,
+               domain_id,
+               domain_type, domain, domain_beizhu, domain_usergroup
+        from huoma_domain
+        where id = #{id}
+    </select>
+
+    <select id="queryAllByDomainUserGroup" resultMap="HuomaDomainMap">
+        select * from huoma_domain where domain_usergroup = #{userGroup}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from huoma_domain
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="domainId != null">
+                and domain_id = #{domainId}
+            </if>
+            <if test="domainType != null">
+                and domain_type = #{domainType}
+            </if>
+            <if test="domain != null and domain != ''">
+                and domain = #{domain}
+            </if>
+            <if test="domainBeizhu != null and domainBeizhu != ''">
+                and domain_beizhu = #{domainBeizhu}
+            </if>
+            <if test="domainUsergroup != null and domainUsergroup != ''">
+                and domain_usergroup = #{domainUsergroup}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into huoma_domain(domain_id, domain_type, domain, domain_beizhu, domain_usergroup)
+        values (#{domainId}, #{domainType}, #{domain}, #{domainBeizhu}, #{domainUsergroup})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into huoma_domain(domain_id, domain_type, domain, domain_beizhu, domain_usergroup)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.domainId}, #{entity.domainType}, #{entity.domain}, #{entity.domainBeizhu},
+            #{entity.domainUsergroup})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into huoma_domain(domain_id, domain_type, domain, domain_beizhu, domain_usergroup)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.domainId}, #{entity.domainType}, #{entity.domain}, #{entity.domainBeizhu},
+            #{entity.domainUsergroup})
+        </foreach>
+        on duplicate key update
+        domain_id = values(domain_id),
+        domain_type = values(domain_type),
+        domain = values(domain),
+        domain_beizhu = values(domain_beizhu),
+        domain_usergroup = values(domain_usergroup)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update huoma_domain
+        <set>
+            <if test="domainId != null">
+                domain_id = #{domainId},
+            </if>
+            <if test="domainType != null">
+                domain_type = #{domainType},
+            </if>
+            <if test="domain != null and domain != ''">
+                domain = #{domain},
+            </if>
+            <if test="domainBeizhu != null and domainBeizhu != ''">
+                domain_beizhu = #{domainBeizhu},
+            </if>
+            <if test="domainUsergroup != null and domainUsergroup != ''">
+                domain_usergroup = #{domainUsergroup},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from huoma_domain
+        where id = #{id}
+    </delete>
+
+</mapper>
+

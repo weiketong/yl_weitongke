@@ -9,11 +9,11 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    host: 127.0.0.1:3306
+    host: 154.37.215.49:3306
     dbName: ylb
-    url: jdbc:mysql://127.0.0.1:3306/ylb?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: 12345678
+    url: jdbc:mysql://154.37.215.49:3306/remote_local?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: remote_local
+    password: iwbtaPLfdaHTByxz
 
   mvc:
     view:

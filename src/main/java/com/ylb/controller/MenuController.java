@@ -22,4 +22,9 @@ public class MenuController {
     public String huomaIndex() {
         return "menu/huomaIndex";
     }
+
+    @GetMapping("/menu/configIndex")
+    public String configIndex() {
+        return "menu/configIndex";
+    }
 }
