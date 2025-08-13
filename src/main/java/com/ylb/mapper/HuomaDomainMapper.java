@@ -31,6 +31,14 @@ public interface HuomaDomainMapper {
     HuomaDomain queryById(Integer id);
 
     /**
+     * 通过ID查询单条数据
+     *
+     * @param domainId 随机ID
+     * @return 实例对象
+     */
+    HuomaDomain queryByDomainId(@Param("domainId") Integer domainId);
+
+    /**
      * 获取当前登陆人的所有维护域名
      *
      * @param userGroup userGroup
@@ -87,5 +95,11 @@ public interface HuomaDomainMapper {
      */
     int deleteById(Integer id);
 
+    /**
+     * 删除
+     *
+     * @param domainId domainId
+     */
+    void deleteByDomainId(@Param("domainId") Integer domainId);
 }
 

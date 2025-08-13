@@ -21,4 +21,19 @@ public interface DomainService {
      * @param p         p
      */
     void domainList(String loginUser, Integer p, Map<String, Object> result);
+
+    /**
+     * 修改备注
+     *
+     * @param beizhu   beizhu
+     * @param domainId domainId
+     */
+    void updateBeizhu(String beizhu, Integer domainId);
+
+    /**
+     * 删除域名
+     *
+     * @param domainId domainId
+     */
+    void delDomain(Integer domainId);
 }

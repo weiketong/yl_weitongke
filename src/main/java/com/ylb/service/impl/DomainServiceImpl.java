@@ -7,6 +7,7 @@ import com.ylb.mapper.HuomaDomainMapper;
 import com.ylb.service.DomainService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -115,6 +116,20 @@ public class DomainServiceImpl implements DomainService {
             result.put("code", 204);
             result.put("msg", "暂无群活码");
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateBeizhu(String beizhu, Integer domainId) {
+        HuomaDomain huomaDomain = huomaDomainMapper.queryByDomainId(domainId);
+        huomaDomain.setDomainBeizhu(beizhu);
+        huomaDomainMapper.update(huomaDomain);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delDomain(Integer domainId) {
+        huomaDomainMapper.deleteByDomainId(domainId);
     }
 
     /**

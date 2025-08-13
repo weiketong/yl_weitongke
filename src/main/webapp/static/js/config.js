@@ -128,6 +128,7 @@ function getDomainNameList(pageNum) {
                 let domain_beizhu;
                 for (var i=0; i<res.domainList.length; i++) {
 
+                    var id = res.domainList[i].id;
                     var domain_id = res.domainList[i].domainId;
                     
                     // 类型
@@ -329,7 +330,7 @@ function update_beizhu(domain_id) {
             
             $.ajax({
                 type: "GET",
-                url: "./update_beizhu.php?beizhu=" + beizhu + "&domain_id=" + domain_id,
+                url: "/updateBeizhu?beizhu=" + beizhu + "&domainId=" + domain_id,
                 success: function(res){
                     
                     // 成功
@@ -342,7 +343,7 @@ function update_beizhu(domain_id) {
                     }
                 },
                 error: function() {
-                    alert('update_beizhu.php服务器发生错误')
+                    alert('服务器发生错误')
                 }
             });
         }
@@ -431,7 +432,7 @@ function delDomainName(domain_id){
     
     $.ajax({
         type: "GET",
-        url: "./delDomainName.php?domain_id="+domain_id,
+        url: "/delDomain?domainId="+domain_id,
         success: function(res){
             
             // 成功
@@ -454,7 +455,7 @@ function delDomainName(domain_id){
         error: function() {
             
             // 服务器发生错误
-            showErrorResultForphpfileName('delDomainName.php');
+            showErrorResultForphpfileName('delDomain.java');
         }
     });
 }

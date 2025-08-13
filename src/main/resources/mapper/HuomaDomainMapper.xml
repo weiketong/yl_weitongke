@@ -23,6 +23,14 @@
         where id = #{id}
     </select>
 
+    <select id="queryByDomainId" resultMap="HuomaDomainMap">
+        select id,
+               domain_id,
+               domain_type, domain, domain_beizhu, domain_usergroup
+        from huoma_domain
+        where domain_id = #{domainId}
+    </select>
+
     <select id="queryAllByDomainUserGroup" resultMap="HuomaDomainMap">
         select * from huoma_domain where domain_usergroup = #{userGroup}
     </select>
@@ -113,5 +121,10 @@
         where id = #{id}
     </delete>
 
+    <delete id="deleteByDomainId">
+        delete
+        from huoma_domain
+        where domain_id = #{domainId}
+    </delete>
 </mapper>
 

@@ -37,13 +37,6 @@
                 </li>
             </a>
 
-            <a href="${pageContext.request.contextPath}/dwz/">
-                <li class="nav-li">
-                    <i class="icon i-dwz"></i>
-                    <span class="nav-text">短网址</span>
-                </li>
-            </a>
-
             <a href="${pageContext.request.contextPath}/menu/configIndex/">
                 <li class="nav-li">
                     <i class="icon i-config"></i>
